@@ -29,18 +29,7 @@ const GameBox = styled.div`
 	border: 2px gray solid;
 `;
 
-export default (props) => {
-	console.log(props)
-	return (
-		<div id="tilegame-page">
-			<Background>
-				<GameBox>{/* Do game lol test */}</GameBox>
-			</Background>
-		</div>
-	);
-}
-
-export function tilegame(props) {
+export default function tilegame(props) {
 	console.log(props)
 	return (
 		<div id="tilegame-page">
