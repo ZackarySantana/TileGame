@@ -1,12 +1,13 @@
 // Libraries
-import React from 'react';
+import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import styled from 'styled-components';
 
 // Redux
-import store from './redux/store';
+import { initStore, saveToLocalStorage } from './redux/store';
 
 // Components
+
 
 // Styles
 import './styles.scss';
@@ -29,13 +30,36 @@ const GameBox = styled.div`
 	border: 2px gray solid;
 `;
 
-export default function tilegame(props) {
-	console.log(props)
-	return (
-		<div id="tilegame-page">
-			<Background>
-				<GameBox>{/* Do game lol test */}</GameBox>
-			</Background>
-		</div>
-	);
+export default class TileGame extends Component {
+
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			...props
+		}
+	}
+
+	componentDidMount() {
+		initStore(this.state.store);
+		this.unsubscribe = this.state.store.subscribe(() =>
+			saveToLocalStorage(this.state.store.getState()));
+	}
+
+	componentWillUnmount() {
+		this.unsubscribe();
+	}
+
+	render() {
+		return (
+			<div id="tilegame-page">
+				<Background>
+					<Provider store={this.state.store}>
+						<GameBox>{/* Do game lol test */}</GameBox>
+					</Provider>
+				</Background>
+			</div>
+		);
+	}
 }
+
