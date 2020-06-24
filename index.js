@@ -6,11 +6,13 @@ import styled from 'styled-components';
 // Redux
 import { initStore, saveToLocalStorage } from './redux/store';
 
-// Components
-
-
 // Styles
 import './styles.scss';
+
+// Components
+import Game from './game';
+import Sidebar from './sidebar';
+
 
 const Background = styled.div`
 	width: 100vw;
@@ -19,15 +21,20 @@ const Background = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
+
+	overflow: hidden;
+	
+    background-color: #121212;
+    transition: all 0.4s ease-out;
 `;
 
 const GameBox = styled.div`
-	width: 80vw;
-	height: 80vh;
-	z-index: 1;
+    height: -moz-fit-content;
+    height: fit-content;
 
-	background-color: black;
-	border: 2px gray solid;
+	display: flex;
+
+    filter: drop-shadow(0 0 1rem #eeeeee);
 `;
 
 export default class TileGame extends Component {
@@ -52,10 +59,13 @@ export default class TileGame extends Component {
 
 	render() {
 		return (
-			<div id="tilegame-page">
+			<div id="tilegame-page" style={{ position: "fixed" }}>
 				<Background>
 					<Provider store={this.state.store}>
-						<GameBox>{/* Do game lol test */}</GameBox>
+						<GameBox>
+							<Game size={4} />
+							<Sidebar />
+						</GameBox>
 					</Provider>
 				</Background>
 			</div>
