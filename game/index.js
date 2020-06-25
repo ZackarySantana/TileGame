@@ -3,6 +3,7 @@ import React from 'react';
 
 // Styles
 import './styles.scss';
+import Tiles from '../tiles';
 
 // Components
 
@@ -11,11 +12,7 @@ export default function Game(props) {
 		<div id="game">
 			<h1>Tile Game</h1>
 			<hr />
-			<div
-				id="tiles-container"
-				styles={"grid-template-columns: repeat(" + props.size + ", 1fr);"}>
-
-			</div>
+			<Tiles />
 			<hr />
 		</div>
 	);

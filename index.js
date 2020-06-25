@@ -13,7 +13,6 @@ import './styles.scss';
 import Game from './game';
 import Sidebar from './sidebar';
 
-
 const Background = styled.div`
 	width: 100vw;
 	height: 100vh;
@@ -45,12 +44,12 @@ export default class TileGame extends Component {
 		this.state = {
 			...props
 		}
-	}
-
-	componentDidMount() {
 		initStore(this.state.store);
 		this.unsubscribe = this.state.store.subscribe(() =>
 			saveToLocalStorage(this.state.store.getState()));
+	}
+
+	componentDidMount() {
 	}
 
 	componentWillUnmount() {
@@ -63,7 +62,7 @@ export default class TileGame extends Component {
 				<Background>
 					<Provider store={this.state.store}>
 						<GameBox>
-							<Game size={4} />
+							<Game />
 							<Sidebar />
 						</GameBox>
 					</Provider>
