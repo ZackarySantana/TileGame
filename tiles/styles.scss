@@ -1,0 +1,75 @@
+#tilegame-page {
+
+	#tiles-container {
+		display: grid;
+		grid-gap: 10px;
+
+		filter: drop-shadow(0 0 0.75rem var(--text));
+
+		button {
+			position: relative;
+			width: 10vh;
+			min-height: 10vh;
+			max-height: 10vh;
+			padding: 0;
+			border: none;
+			background: none;
+			transition: all 600ms;
+			overflow: hidden;
+			cursor: pointer;
+
+			&:active,
+			&:focus {
+				outline: none;
+			}
+
+			svg {
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 0;
+				height: 10vh;
+			}
+		}
+
+		/* This fires as soon as the element enters the dorm */
+		.tile-transition-enter,
+		.tile-transition-appear {
+			opacity: 0;
+			width: 0;
+			transition: all 400ms;
+			transition-delay: 600ms;
+		}
+
+		/* This is where we can add the transition*/
+		.tile-transition-enter-active,
+		.tile-transition-appear-active {
+			opacity: 1;
+			width: 10vh;
+			transition: all 400ms;
+			transition-delay: 600ms;
+		}
+
+		/* This is where we can add the transition*/
+		.tile-transition-appear-done,
+		.tile-transition-enter-done {
+			opacity: 1;
+			width: 10vh;
+			transition: all 400ms;
+			transition-delay: 600ms;
+		}
+
+		/* This fires as soon as the this.state.showtile is false */
+		.tile-transition-exit {
+			opacity: 1;
+			transition: all 400ms;
+		}
+
+		/* fires as element leaves the DOM*/
+		.tile-transition-exit-active {
+			opacity: 0;
+			width: 0;
+			transition: all 400ms;
+		}
+	}
+}

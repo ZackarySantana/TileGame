@@ -1,9 +1,10 @@
 // Libraries
 import React, { Component } from 'react';
-import { Provider } from 'react-redux';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 // Redux
+import { Provider } from 'react-redux';
 import { initStore, saveToLocalStorage } from './redux/store';
 
 // Styles
@@ -38,18 +39,23 @@ const GameBox = styled.div`
 
 export default class TileGame extends Component {
 
+	static propTypes = {
+		store: PropTypes.object
+	}
+
 	constructor(props) {
 		super(props);
 
 		this.state = {
 			...props
 		}
+
 		initStore(this.state.store);
-		this.unsubscribe = this.state.store.subscribe(() =>
-			saveToLocalStorage(this.state.store.getState()));
 	}
 
 	componentDidMount() {
+		this.unsubscribe = this.state.store.subscribe(() =>
+			saveToLocalStorage(this.state.store.getState()));
 	}
 
 	componentWillUnmount() {
@@ -71,4 +77,3 @@ export default class TileGame extends Component {
 		);
 	}
 }
-

@@ -1,11 +1,12 @@
 // Libraries
 import React from 'react';
+import PropTypes from 'prop-types';
 
 // Redux
 import { connect } from 'react-redux';
 
 // Styles
-//import './styles.scss';
+import './styles.scss';
 
 // Components
 import Tile from './Tile';
@@ -29,8 +30,19 @@ function Tiles(props) {
 
 const mapStateToProps = state => ({
 	tiles: state.tiles,
-	size: state.size,
-	slider: state.slider
+	size: state.size
 });
+
+Tiles.propstypes = {
+	tiles: PropTypes.arrayOf(PropTypes.objectOf({
+		pair: PropTypes.number,
+		clicked: PropTypes.bool,
+		matched: PropTypes.bool,
+		flick: PropTypes.bool,
+		viewBox: PropTypes.string,
+		path: PropTypes.string
+	})),
+	size: PropTypes.number.isRequired
+}
 
 export default connect(mapStateToProps)(Tiles);

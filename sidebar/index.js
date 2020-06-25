@@ -13,13 +13,13 @@ export default function Sidebar() {
 				<h2>Stats</h2>
 				<hr />
 				<p>
-					Games won on '2x2' = 0
+					'2x2' won = 0
 				</p>
 				<p>
-					Games won on '4x4' = 0
+					'4x4' won = 0
 				</p>
 				<p>
-					Games won on '6x6' = 0
+					'6x6' won = 0
 				</p>
 			</div>
 			<div>

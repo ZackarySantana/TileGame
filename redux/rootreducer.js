@@ -7,6 +7,7 @@ const initialState = {
 	size: 4,
 	slider: 4,
 	currentTile: -1,
+	lastFlick: -1,
 	stats: {
 		gamesWon2: 0,
 		gamesWon4: 0,
@@ -23,6 +24,8 @@ export default function reduce(state = initialState, action) {
 	switch (action.type) {
 		case Actions.CLICK_TILE:
 			return clickTile(newState, action.payload);
+		case Actions.UNFLICK:
+			return unflick(newState, action.payload);
 		case Actions.NEW_GAME:
 			return newGame(newState, action.payload);
 		case Actions.RESET:
@@ -35,9 +38,37 @@ export default function reduce(state = initialState, action) {
 	}
 }
 
+let lock = false;
+
 function clickTile(state, payload) {
+	if (!lock && !state.tiles[payload.index].matched) { // Clicked a not matched tile
+		if (state.currentTile === -1) { // The first click in a pair
+			state.tiles[payload.index].clicked = true;
+			state.currentTile = payload.index;
+		} else if (state.currentTile !== payload.index) { // Not clicking the same tile
+			if (state.tiles[state.currentTile].pair === payload.index) { // Found matching pair
+				state.tiles[state.currentTile].clicked = false;
+				state.tiles[state.currentTile].matched = true;
+				state.tiles[payload.index].matched = true;
+				state.currentTile = -1;
+			} else { // Failed pair
+				lock = true;
+				state.tiles[payload.index].flick = true;
+				state.lastFlick = payload.index;
+			}
+		}
+	}
+	return state;
+}
 
-
+function unflick(state, payload) {
+	if (lock && state.lastFlick === payload.index) {
+		state.tiles[state.currentTile].clicked = false;
+		state.tiles[state.lastFlick].flick = false;
+		state.lastFlick = -1;
+		state.currentTile = -1;
+		lock = false;
+	}
 	return state;
 }
 

@@ -7,7 +7,7 @@ import Tiles from '../tiles';
 
 // Components
 
-export default function Game(props) {
+export default function Game() {
 	return (
 		<div id="game">
 			<h1>Tile Game</h1>

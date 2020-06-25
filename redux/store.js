@@ -4,7 +4,7 @@ import RootReducer from './rootreducer';
 
 export function initStore(store) {
 	store.replaceReducer(RootReducer);
-	store.dispatch(reset(loadFromLocalState()));
+	store.dispatch(reset(/*loadFromLocalState()*/));
 }
 
 export function saveToLocalStorage(state) {
