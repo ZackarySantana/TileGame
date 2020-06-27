@@ -5,7 +5,6 @@ import { generateTiles } from './generator';
 const initialState = {
 	tiles: generateTiles(4),
 	size: 4,
-	slider: 4,
 	currentTile: -1,
 	lastFlick: -1,
 	stats: {
@@ -41,7 +40,7 @@ export default function reduce(state = initialState, action) {
 let lock = false;
 
 function clickTile(state, payload) {
-	if (!lock && !state.tiles[payload.index].matched) { // Clicked a not matched tile
+	if (!state.gameComplete && !lock && !state.tiles[payload.index].matched) { // Clicked a not matched tile
 		if (state.currentTile === -1) { // The first click in a pair
 			state.tiles[payload.index].clicked = true;
 			state.currentTile = payload.index;
@@ -62,18 +61,36 @@ function clickTile(state, payload) {
 }
 
 function unflick(state, payload) {
-	if (lock && state.lastFlick === payload.index) {
-		state.tiles[state.currentTile].clicked = false;
-		state.tiles[state.lastFlick].flick = false;
-		state.lastFlick = -1;
-		state.currentTile = -1;
-		lock = false;
+	if (!state.gameComplete) {
+		if (lock && state.lastFlick === payload.index) {
+			state.tiles[state.currentTile].clicked = false;
+			state.tiles[state.lastFlick].flick = false;
+			state.lastFlick = -1;
+			state.currentTile = -1;
+			lock = false;
+		}
+		let pass = true;
+		for (const tile in state.tiles) {
+			if (!state.tiles[tile].matched) {
+				pass = false;
+				console.log(tile)
+			}
+		}
+		if (pass) {
+			state.gameComplete = true;
+			state.stats['gamesWon' + state.size] = state.stats['gamesWon' + state.size] + 1;
+		}
 	}
 	return state;
 }
 
 function newGame(state, payload) {
-
+	state.tiles = generateTiles(payload.newSize);
+	state.size = payload.newSize;
+	state.currentTile = -1;
+	state.lastFlick = -1;
+	state.gameComplete = false;
+	lock = false;
 
 	return state;
 }

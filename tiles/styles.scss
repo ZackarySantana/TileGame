@@ -26,9 +26,12 @@
 			svg {
 				position: absolute;
 				top: 0;
-				left: 0;
+				left: 50%;
 				width: 0;
 				height: 10vh;
+
+				-webkit-transform: translateX(-50%);
+				transform: translateX(-50%)
 			}
 		}
 

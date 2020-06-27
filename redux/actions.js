@@ -20,9 +20,12 @@ export function unflick(index) {
 	}
 }
 
-export function newGame() {
+export function newGame(newSize) {
 	return {
-		type: NEW_GAME
+		type: NEW_GAME,
+		payload: {
+			newSize
+		}
 	}
 }
 

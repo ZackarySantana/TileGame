@@ -11,14 +11,17 @@ import './styles.scss';
 // Components
 import Tile from './Tile';
 
+let multiple = 1;
+
 function Tiles(props) {
+	multiple *= 37;
 	return (
 		<div
 			id="tiles-container"
 			style={{ gridTemplateColumns: "repeat(" + props.size + ", 1fr)" }}>
 			{
 				Object.keys(props.tiles).map(key => (
-					<Tile key={parseInt(key)} id={parseInt(key)} svg={{
+					<Tile key={parseInt(key) * multiple} id={parseInt(key)} svg={{
 						viewBox: props.tiles[key].viewBox,
 						path: props.tiles[key].path
 					}} />
