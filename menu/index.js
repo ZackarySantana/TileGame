@@ -1,8 +1,8 @@
 import React from 'react';
-import {withRouter} from 'react-router';
+import { withRouter } from 'react-router';
 
 function Menu(props) {
-    const {history} = props;
+    const { history } = props;
 
     return (
         <div>
