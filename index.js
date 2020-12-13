@@ -13,6 +13,7 @@ import './styles.scss';
 // Components
 import Game from './game';
 import Sidebar from './sidebar';
+import Menu from './menu';
 
 const Background = styled.div`
 	width: 100vw;
@@ -70,6 +71,7 @@ export default class TileGame extends Component {
 						<GameBox>
 							<Game />
 							<Sidebar />
+							<Menu />
 						</GameBox>
 					</Provider>
 				</Background>
