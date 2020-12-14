@@ -6,30 +6,28 @@ export function clickTile(index) {
 	return {
 		type: CLICK_TILE,
 		payload: {
-			index
-		}
-	}
+			index,
+		},
+	};
 }
 
 export function unflick(index) {
 	return {
 		type: UNFLICK,
 		payload: {
-			index
-		}
-	}
+			index,
+		},
+	};
 }
 
 export function newGame(newSize) {
 	return {
 		type: NEW_GAME,
 		payload: {
-			newSize
-		}
-	}
+			newSize,
+		},
+	};
 }
-
-
 
 export const RESET = "RESET";
 
@@ -37,7 +35,7 @@ export function reset(loadedState) {
 	return {
 		type: RESET,
 		payload: {
-			loadedState
-		}
-	}
+			loadedState,
+		},
+	};
 }

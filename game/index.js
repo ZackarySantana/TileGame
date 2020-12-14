@@ -1,9 +1,9 @@
 // Libraries
-import React from 'react';
+import React from "react";
 
 // Styles
-import './styles.scss';
-import Tiles from '../tiles';
+import "./styles.scss";
+import Tiles from "../tiles";
 
 // Components
 
